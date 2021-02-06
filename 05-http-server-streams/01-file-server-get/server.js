@@ -46,6 +46,7 @@ server.on('request', (req, res) => {
   if (pathname.includes('/') || filepath.indexOf(PATH_TO_FILES) !== 0) {
     res.statusCode = 400;
     res.end();
+    return;
   }
 
   switch (req.method) {
