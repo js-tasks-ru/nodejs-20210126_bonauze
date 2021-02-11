@@ -14,14 +14,14 @@ const subscribes = Object.create(null);
 router.get('/subscribe', async (ctx) => {
   const id = generateUniqueId();
 
-  await new Promise((resolve, reject) => {
-    subscribes[id] = resolve;
-    ctx.req.on('close', reject);
-  }).then((body) => {
-    ctx.body = body;
-  }).catch(() => {
+  try {
+    ctx.body = await new Promise((resolve, reject) => {
+      subscribes[id] = resolve;
+      ctx.req.on('close', reject);
+    });
+  } catch {
     delete subscribes[id];
-  });
+  }
 });
 
 router.post('/publish', async (ctx) => {
