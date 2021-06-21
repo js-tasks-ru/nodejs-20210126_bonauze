@@ -16,6 +16,6 @@ describe('intro/sum', () => {
       it('бросает TypeError, если аргументы - не числа', () => {
         expect(() => sum(a, b)).throw(TypeError);
       });
-    })
+    });
   });
 });

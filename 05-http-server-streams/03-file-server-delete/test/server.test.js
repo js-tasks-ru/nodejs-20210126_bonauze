@@ -39,7 +39,7 @@ describe('http-server-streams/file-server-delete', () => {
               setTimeout(() => {
                 expect(
                     fse.existsSync(path.join(filesFolder, 'small.png')),
-                    'файл small.png не должен оставаться на диске'
+                    'файл small.png не должен оставаться на диске',
                 ).to.be.false;
 
                 done();
