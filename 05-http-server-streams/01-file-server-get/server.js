@@ -19,14 +19,14 @@ const sendFileByStream = (res, filepath) => {
     }
   });
 
-  stream.on('error', ({code}) => {
+  stream.on('error', ({ code }) => {
     if (['ENOENT', 'EISDIR'].includes(code)) {
       res.statusCode = 404;
-      res.end(JSON.stringify({error: true, message: 'Invalid file path'}));
+      res.end(JSON.stringify({ error: true, message: 'Invalid file path' }));
       return;
     }
     res.statusCode = 500;
-    res.end(JSON.stringify({error: true, message: 'Error reading file'}));
+    res.end(JSON.stringify({ error: true, message: 'Error reading file' }));
   });
 
   stream.on('end', () => {

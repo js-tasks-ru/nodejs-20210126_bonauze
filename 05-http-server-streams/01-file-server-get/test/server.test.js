@@ -28,7 +28,7 @@ describe('http-server-streams/file-server-get', () => {
       it('файл отдается по запросу', (done) => {
         fse.copyFileSync(
             path.join(fixturesFolder, 'index.js'),
-            path.join(filesFolder, 'index.js'),
+            path.join(filesFolder, 'index.js')
         );
 
         const content = fse.readFileSync(path.join(filesFolder, 'index.js'));
@@ -43,7 +43,7 @@ describe('http-server-streams/file-server-get', () => {
 
           expect(
               Buffer.concat(body).equals(content),
-              'ответ сервера - исходный файл index.js',
+              'ответ сервера - исходный файл index.js'
           ).to.be.true;
           done();
         });

@@ -16,7 +16,7 @@ describe('event-loop/events-order', () => {
           path.join(__dirname, '../solution.txt'),
           {
             encoding: 'utf-8',
-          },
+          }
       ).replace(/\r\n|\r|\n/g, EOL);
 
       const output = execSync(`node "${path.join(__dirname, '../index.js')}"`, {

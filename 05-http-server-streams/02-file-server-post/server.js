@@ -15,11 +15,11 @@ const removeFile = (filepath) => {
     if (error) {
       console.error(error);
     }
-  });
+  })
 };
 
 const saveFileByStream = (req, res, filepath, limit = Infinity) => {
-  const limitStream = new LimitSizeStream({limit});
+  const limitStream = new LimitSizeStream({ limit });
   const writingStream = fs.createWriteStream(filepath);
 
   req.on('data', (chunk) => {
@@ -34,12 +34,12 @@ const saveFileByStream = (req, res, filepath, limit = Infinity) => {
   req.on('error', () => {
     removeFile(filepath);
     res.status = 500;
-    res.end(JSON.stringify({error: true, message: 'File write error'}));
+    res.end(JSON.stringify({ error: true, message: 'File write error' }));
   });
 
   req.on('end', () => {
     res.statusCode = 201;
-    res.end(JSON.stringify({filepath}));
+    res.end(JSON.stringify({ filepath }));
   });
 
   req.on('aborted', () => {
@@ -60,7 +60,7 @@ const saveFileByStream = (req, res, filepath, limit = Infinity) => {
     removeFile(filepath);
     if (error instanceof LimitExceededError) {
       res.statusCode = 413;
-      res.end(JSON.stringify({error: true, message: 'The file is large'}));
+      res.end(JSON.stringify({ error: true, message: 'The file is large' }));
       return;
     }
     res.statusCode = 500;
@@ -83,7 +83,7 @@ server.on('request', (req, res) => {
       fs.stat(filepath, (error) => {
         if (!error) {
           res.statusCode = 409;
-          res.end(JSON.stringify({error: true, message: 'File exists'}));
+          res.end(JSON.stringify({ error: true, message: 'File exists' }));
           return;
         }
         saveFileByStream(req, res, filepath, 1000000);
